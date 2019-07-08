@@ -1,0 +1,78 @@
+{% extends 'base.html' %}
+
+{% block title %} home {% endblock %}
+
+{% block body %}
+
+{% if messages %}
+    {% for message in messages %}
+<div class="messages alert alert-success alert-dismissible fade show " role="alert">
+  <strong>{% if message.tags %}<p class="{{ message.tags }}"{% endif %}>{{ message }}
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+    </strong></p>
+     {% endfor %}
+  </button>
+</div>
+{% endif %}
+
+<div class="jumbotron">
+  <h1 class="display-4">Welcome to Crypto News Network</h1>
+  <p class="lead">Your source to the latest and better CryptoCurrency News.</p>
+
+</div>
+<div class="container">
+  <h3 class="ml2"> Current Top Crypto Prices in $ </h3></br>
+  <table class="table table-striped table-bordered table-hover">
+    <thead>
+      <tr>
+        <th scope="col">Name</th>
+        <th scope="col">Price</th>
+        <th scope="col">24h High</th>
+        <th scope="col">24h Low</th>
+        <th scope="col">Market Cap</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for key,value in price.DISPLAY.items %}
+
+
+      <tr>
+        <td>{{ key }} </td>
+        <td> {{value.USD.PRICE}}</td>
+        <td>{{value.USD.HIGHDAY}} </td>
+        <td>{{value.USD.LOWDAY}} </td>
+        <td> {{value.USD.MKTCAP}} </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+<div class="container-fluid">
+  <div class="row my-4 mx-4">
+
+    {% for x in myapi.Data %}
+
+    <div class="col-md-4 col-lg-4 text-center">
+
+
+      <img class="img-circle" src="{{x.imageurl}}" width="140" height="140">
+      <h2>{{x.title}}</h2>
+      <p>
+        {{x.body}}
+      </p>
+      <p><a href="{{x.url}}"><button class="btn btn-outline-danger">Read More &raquo;</button></a></p>
+    </div>
+
+    {% endfor %}
+  </div>
+</div>
+</div>
+</div>
+
+{% endblock %}
+
+
+{% block myhead %}
+
+{% endblock %}
